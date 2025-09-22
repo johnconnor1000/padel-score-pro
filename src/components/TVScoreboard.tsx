@@ -5,10 +5,11 @@ import { Clock } from 'lucide-react';
 interface TVScoreboardProps {
   match: Match;
   statusMessage: StatusMessage;
+  showVictoryScreen: boolean;
   getScoreDisplay: (points: number, isDeuce: boolean, advantage: string | null, teamId: string) => string;
 }
 
-const TVScoreboard = ({ match, statusMessage, getScoreDisplay }: TVScoreboardProps) => {
+const TVScoreboard = ({ match, statusMessage, showVictoryScreen, getScoreDisplay }: TVScoreboardProps) => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [matchDuration, setMatchDuration] = useState(0);
 
@@ -49,7 +50,7 @@ const TVScoreboard = ({ match, statusMessage, getScoreDisplay }: TVScoreboardPro
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-court-surface to-background p-8">
+    <div className="min-h-screen bg-gradient-to-br from-court-surface to-background p-4 md:p-8">
       {/* Header with Timer */}
       <div className="flex justify-between items-center mb-8">
         <div className="match-timer flex items-center gap-2">
@@ -65,8 +66,8 @@ const TVScoreboard = ({ match, statusMessage, getScoreDisplay }: TVScoreboardPro
       </div>
 
       {/* Main Scoreboard */}
-      <div className="scoreboard-display rounded-3xl p-8 mb-8">
-        <div className="grid grid-cols-2 gap-8">
+      <div className="scoreboard-display rounded-2xl md:rounded-3xl p-4 md:p-8 mb-4 md:mb-8">
+        <div className="grid grid-cols-2 gap-4 md:gap-8">
           
           {/* Team 1 */}
           <div className="text-center">
@@ -172,17 +173,20 @@ const TVScoreboard = ({ match, statusMessage, getScoreDisplay }: TVScoreboardPro
       )}
 
       {/* Match Finished Celebration */}
-      {match.gameState.isFinished && (
+      {showVictoryScreen && match && (
         <div className="fixed inset-0 bg-gradient-to-br from-padel-primary to-padel-secondary flex items-center justify-center z-50">
           <div className="text-center text-white celebration">
-            <h1 className="font-display text-8xl font-bold mb-8">
+            <h1 className="font-display text-4xl md:text-6xl lg:text-8xl font-bold mb-4 md:mb-8">
               ¡{match.gameState.winner === match.team1.id ? match.team1.name : match.team2.name} GANÓ!
             </h1>
-            <div className="text-4xl font-bold mb-8">
+            <div className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-8">
               {match.score.team1Sets} - {match.score.team2Sets}
             </div>
-            <div className="text-2xl opacity-90">
+            <div className="text-lg md:text-xl lg:text-2xl opacity-90 mb-4">
               Tiempo total: {formatTime(matchDuration)}
+            </div>
+            <div className="text-sm md:text-base opacity-70">
+              Volviendo a configuración en 60 segundos...
             </div>
           </div>
         </div>

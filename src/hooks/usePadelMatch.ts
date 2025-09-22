@@ -10,6 +10,7 @@ export const usePadelMatch = (initialConfig: MatchConfig) => {
     text: '',
     visible: false
   });
+  const [showVictoryScreen, setShowVictoryScreen] = useState(false);
 
   // Initialize match
   const startMatch = useCallback((team1: Team, team2: Team) => {
@@ -112,12 +113,13 @@ export const usePadelMatch = (initialConfig: MatchConfig) => {
       } else {
         // Regular game logic
         if (newMatch.config.gameMode === 'golden-point') {
-          // Golden point: deuce at 40-40, next point wins
+          // Golden point: at deuce (40-40), next point wins
           if (team1Points >= 3 && team2Points >= 3) {
-            if (team1Points === team2Points) {
+            if (team1Points === team2Points && team1Points === 3) {
+              // First time reaching deuce (40-40)
               newMatch.gameState.deuce = true;
             } else {
-              // Game won
+              // Any point after deuce wins the game (golden point rule)
               if (team1Points > team2Points) {
                 newMatch.score.team1Games++;
               } else {
@@ -226,11 +228,13 @@ export const usePadelMatch = (initialConfig: MatchConfig) => {
         match.gameState.isFinished = true;
         match.gameState.winner = match.score.team1Sets > match.score.team2Sets ? match.team1.id : match.team2.id;
         
-        setStatusMessage({
-          type: 'match-won',
-          text: `¡Ganó ${match.gameState.winner === match.team1.id ? match.team1.name : match.team2.name}!`,
-          visible: true
-        });
+        setShowVictoryScreen(true);
+        
+        // After 1 minute, reset to configuration
+        setTimeout(() => {
+          setMatch(null);
+          setShowVictoryScreen(false);
+        }, 60000);
       }
     }
   };
@@ -246,13 +250,44 @@ export const usePadelMatch = (initialConfig: MatchConfig) => {
 
   // Undo last point
   const undoLastPoint = useCallback(() => {
-    // Implementation for undo would go here
-    console.log('Undo last point');
-  }, []);
+    if (!match || match.gameState.isFinished) return;
+
+    setMatch(prevMatch => {
+      if (!prevMatch) return null;
+      
+      // Simple implementation: just subtract one point from the last team that scored
+      const newMatch = { ...prevMatch };
+      
+      if (newMatch.score.team1Points > 0) {
+        newMatch.score.team1Points--;
+      } else if (newMatch.score.team2Points > 0) {
+        newMatch.score.team2Points--;
+      }
+      
+      // Reset game state flags if needed
+      if (newMatch.score.team1Points < 3 || newMatch.score.team2Points < 3) {
+        newMatch.gameState.deuce = false;
+        newMatch.gameState.advantage = null;
+      }
+      
+      setStatusMessage({
+        type: 'info',
+        text: 'Punto deshecho',
+        visible: true
+      });
+      
+      setTimeout(() => {
+        setStatusMessage(prev => ({ ...prev, visible: false }));
+      }, 1500);
+      
+      return newMatch;
+    });
+  }, [match]);
 
   return {
     match,
     statusMessage,
+    showVictoryScreen,
     startMatch,
     addPoint,
     undoLastPoint,

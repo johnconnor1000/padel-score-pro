@@ -21,6 +21,7 @@ const Index = () => {
   const {
     match,
     statusMessage,
+    showVictoryScreen,
     startMatch,
     addPoint,
     undoLastPoint,
@@ -79,8 +80,9 @@ const Index = () => {
           hasMatch={!!match}
         />
         <TVScoreboard 
-          match={match}
+          match={match} 
           statusMessage={statusMessage}
+          showVictoryScreen={showVictoryScreen}
           getScoreDisplay={getScoreDisplay}
         />
       </>
