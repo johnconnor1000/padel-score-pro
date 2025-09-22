@@ -113,13 +113,14 @@ export const usePadelMatch = (initialConfig: MatchConfig) => {
       } else {
         // Regular game logic
         if (newMatch.config.gameMode === 'golden-point') {
-          // Golden point: at deuce (40-40), next point wins
+          // Golden point: at deuce (40-40), next point wins immediately
           if (team1Points >= 3 && team2Points >= 3) {
-            if (team1Points === team2Points && team1Points === 3) {
-              // First time reaching deuce (40-40)
+            if (team1Points === team2Points) {
+              // Deuce state (both have same points, 3 or more)
               newMatch.gameState.deuce = true;
+              newMatch.gameState.advantage = null;
             } else {
-              // Any point after deuce wins the game (golden point rule)
+              // One team has more points after deuce - they win the game immediately (golden point)
               if (team1Points > team2Points) {
                 newMatch.score.team1Games++;
               } else {
@@ -143,6 +144,8 @@ export const usePadelMatch = (initialConfig: MatchConfig) => {
             
             newMatch.score.team1Points = 0;
             newMatch.score.team2Points = 0;
+            newMatch.gameState.deuce = false;
+            newMatch.gameState.advantage = null;
             
             checkSetWon(newMatch);
           }
