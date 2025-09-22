@@ -2,95 +2,121 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Padel Scoring System - Professional Sports Design System */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 @layer base {
   :root {
+    /* Core Brand Colors - Padel Theme */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
+    --foreground: 0 0% 8%;
+    
+    /* Padel Court Colors */
+    --padel-primary: 142 76% 36%;     /* Padel court green */
+    --padel-secondary: 142 76% 28%;   /* Darker padel green */
+    --padel-accent: 142 86% 85%;      /* Light padel green */
+    
+    /* Sports Interface Colors */
+    --court-surface: 142 25% 96%;     /* Light court color */
+    --score-primary: 0 0% 8%;         /* Score text */
+    --score-secondary: 0 0% 45%;      /* Secondary text */
+    --team-blue: 221 83% 53%;         /* Team 1 color */
+    --team-red: 0 84% 60%;            /* Team 2 color */
+    
+    /* Status Colors */
+    --success: 142 76% 36%;
+    --warning: 43 96% 56%;
+    --error: 0 84% 60%;
+    --info: 221 83% 53%;
+    
+    /* UI System Colors */
+    --primary: 142 76% 36%;           /* Padel primary */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 142 25% 96%;         /* Court surface */
+    --secondary-foreground: 0 0% 8%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 142 86% 85%;
+    --accent-foreground: 0 0% 8%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
+    --card-foreground: 0 0% 8%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
+    --popover-foreground: 0 0% 8%;
+    --border: 142 25% 91%;
+    --input: 142 25% 91%;
+    --ring: 142 76% 36%;
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
+    --sidebar-foreground: 0 0% 26%;
+    --sidebar-primary: 142 76% 36%;
     --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 142 25% 96%;
+    --sidebar-accent-foreground: 0 0% 8%;
+    --sidebar-border: 142 25% 91%;
+    --sidebar-ring: 142 76% 36%;
+    
+    /* Custom Gradients */
+    --gradient-padel: linear-gradient(135deg, hsl(var(--padel-primary)), hsl(var(--padel-secondary)));
+    --gradient-score: linear-gradient(180deg, hsl(var(--court-surface)), hsl(var(--background)));
+    --gradient-team-blue: linear-gradient(135deg, hsl(var(--team-blue)), hsl(var(--team-blue) / 0.8));
+    --gradient-team-red: linear-gradient(135deg, hsl(var(--team-red)), hsl(var(--team-red) / 0.8));
+    
+    /* Shadows */
+    --shadow-score: 0 4px 20px hsl(var(--padel-primary) / 0.1);
+    --shadow-elevated: 0 8px 32px hsl(var(--foreground) / 0.1);
+    --shadow-glow: 0 0 40px hsl(var(--padel-primary) / 0.3);
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --background: 0 0% 8%;
+    --foreground: 0 0% 95%;
+    
+    /* Padel colors remain the same in dark mode */
+    --padel-primary: 142 76% 36%;
+    --padel-secondary: 142 76% 28%;
+    --padel-accent: 142 86% 85%;
+    --court-surface: 142 25% 12%;
+    --score-primary: 0 0% 95%;
+    --score-secondary: 0 0% 70%;
+    --team-blue: 221 83% 53%;
+    --team-red: 0 84% 60%;
+    
+    --success: 142 76% 36%;
+    --warning: 43 96% 56%;
+    --error: 0 84% 60%;
+    --info: 221 83% 53%;
+    
+    --primary: 142 76% 36%;
+    --primary-foreground: 0 0% 95%;
+    --secondary: 142 25% 12%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 70%;
+    --accent: 142 86% 85%;
+    --accent-foreground: 0 0% 8%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 95%;
+    
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 95%;
+    --border: 142 25% 15%;
+    --input: 142 25% 15%;
+    --ring: 142 76% 36%;
+    
+    --sidebar-background: 0 0% 8%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 142 76% 36%;
+    --sidebar-primary-foreground: 0 0% 95%;
+    --sidebar-accent: 142 25% 15%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 142 25% 15%;
+    --sidebar-ring: 142 76% 36%;
   }
 }
 
@@ -100,6 +126,71 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+  }
+
+  /* Typography */
+  .font-display {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 800;
+  }
+  
+  .font-score {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+  }
+}
+
+/* Sports Components */
+@layer components {
+  .scoreboard-display {
+    @apply bg-gradient-to-b from-court-surface to-background;
+    @apply border border-padel-accent/20;
+    @apply shadow-[var(--shadow-score)];
+  }
+  
+  .team-score {
+    @apply font-score text-8xl font-bold tracking-tight;
+    @apply transition-all duration-300;
+  }
+  
+  .team-name {
+    @apply font-display text-2xl font-bold uppercase tracking-wide;
+  }
+  
+  .match-timer {
+    @apply font-mono text-xl font-semibold;
+    @apply bg-padel-primary text-white px-4 py-2 rounded-lg;
+  }
+  
+  .point-animation {
+    @apply animate-bounce;
+  }
+  
+  .celebration {
+    @apply animate-pulse;
+  }
+  
+  .team-indicator-blue {
+    @apply bg-gradient-to-r from-team-blue to-team-blue/80;
+    @apply text-white shadow-lg;
+  }
+  
+  .team-indicator-red {
+    @apply bg-gradient-to-r from-team-red to-team-red/80;
+    @apply text-white shadow-lg;
+  }
+  
+  .court-button {
+    @apply bg-padel-primary hover:bg-padel-secondary;
+    @apply text-white font-semibold py-3 px-6 rounded-lg;
+    @apply transition-all duration-200 hover:shadow-glow;
+    @apply active:scale-95;
+  }
+  
+  .status-message {
+    @apply bg-white/95 backdrop-blur-sm border border-padel-accent/30;
+    @apply px-6 py-4 rounded-xl shadow-elevated;
+    @apply font-medium text-center;
   }
 }

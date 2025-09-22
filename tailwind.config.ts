@@ -14,6 +14,23 @@ export default {
     },
     extend: {
       colors: {
+        /* Padel System Colors */
+        'padel-primary': 'hsl(var(--padel-primary))',
+        'padel-secondary': 'hsl(var(--padel-secondary))',
+        'padel-accent': 'hsl(var(--padel-accent))',
+        'court-surface': 'hsl(var(--court-surface))',
+        'score-primary': 'hsl(var(--score-primary))',
+        'score-secondary': 'hsl(var(--score-secondary))',
+        'team-blue': 'hsl(var(--team-blue))',
+        'team-red': 'hsl(var(--team-red))',
+        
+        /* Status Colors */
+        success: 'hsl(var(--success))',
+        warning: 'hsl(var(--warning))',
+        error: 'hsl(var(--error))',
+        info: 'hsl(var(--info))',
+
+        /* Base UI Colors */
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -62,6 +79,11 @@ export default {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      boxShadow: {
+        'glow': '0 0 40px hsl(var(--padel-primary) / 0.3)',
+        'score': '0 4px 20px hsl(var(--padel-primary) / 0.1)',
+        'elevated': '0 8px 32px hsl(var(--foreground) / 0.1)',
       },
       keyframes: {
         "accordion-down": {
