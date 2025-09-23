@@ -13,7 +13,7 @@ export const usePadelMatch = (initialConfig: MatchConfig) => {
   const [showVictoryScreen, setShowVictoryScreen] = useState(false);
 
   // Initialize match
-  const startMatch = useCallback((team1: Team, team2: Team) => {
+  const startMatch = useCallback((team1: Team, team2: Team, config?: MatchConfig) => {
     const newMatch: Match = {
       id: Date.now().toString(),
       team1,
@@ -34,7 +34,7 @@ export const usePadelMatch = (initialConfig: MatchConfig) => {
         deuce: false,
         advantage: null,
       },
-      config: initialConfig,
+      config: config ?? initialConfig,
       startTime: new Date(),
       duration: 0,
       sideChanged: false,

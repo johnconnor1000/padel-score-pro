@@ -29,7 +29,7 @@ const Index = () => {
   } = usePadelMatch(initialConfig);
 
   const handleStartMatch = (team1: Team, team2: Team, config: MatchConfig) => {
-    startMatch(team1, team2);
+    startMatch(team1, team2, config);
     // Auto-switch to TV mode after match starts
     setCurrentView('tv');
     
