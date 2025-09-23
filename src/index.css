@@ -141,7 +141,7 @@
   }
 }
 
-/* Sports Components */
+/* Sports Components - TV Optimized */
 @layer components {
   .scoreboard-display {
     @apply bg-gradient-to-b from-court-surface to-background;
@@ -149,20 +149,34 @@
     @apply shadow-[var(--shadow-score)];
   }
   
+  /* TV-Optimized Typography - Massive sizes for 32" display */
   .team-score {
-    @apply font-score text-8xl font-bold tracking-tight;
-    @apply transition-all duration-300;
+    @apply font-score text-[10rem] sm:text-[12rem] md:text-[14rem] lg:text-[16rem] xl:text-[18rem] 2xl:text-[20rem] font-black tracking-tight leading-none;
+    @apply transition-all duration-300 drop-shadow-2xl;
+  }
+  
+  .tv-sets-games {
+    @apply font-score text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-black;
+  }
+  
+  .tv-team-info {
+    @apply font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold tracking-wide;
+  }
+  
+  .tv-header-info {
+    @apply font-display text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium;
   }
   
   .team-name {
-    @apply font-display text-2xl font-bold uppercase tracking-wide;
+    @apply font-display text-3xl md:text-4xl lg:text-5xl font-bold uppercase tracking-wide;
   }
   
   .match-timer {
-    @apply font-mono text-xl font-semibold;
-    @apply bg-padel-primary text-white px-4 py-2 rounded-lg;
+    @apply font-mono text-xl md:text-2xl font-semibold;
+    @apply bg-padel-primary/90 text-white px-6 py-3 rounded-xl backdrop-blur-sm;
   }
   
+  /* Enhanced Animations */
   .point-animation {
     @apply animate-bounce;
   }
@@ -171,26 +185,48 @@
     @apply animate-pulse;
   }
   
+  /* Team indicators with better visibility and contrast */
   .team-indicator-blue {
-    @apply bg-gradient-to-r from-team-blue to-team-blue/80;
-    @apply text-white shadow-lg;
+    @apply bg-gradient-to-br from-team-blue via-team-blue/90 to-team-blue/80;
+    @apply text-white shadow-2xl border-2 border-team-blue/30;
+    @apply backdrop-blur-sm;
   }
   
   .team-indicator-red {
-    @apply bg-gradient-to-r from-team-red to-team-red/80;
-    @apply text-white shadow-lg;
+    @apply bg-gradient-to-br from-team-red via-team-red/90 to-team-red/80;
+    @apply text-white shadow-2xl border-2 border-team-red/30;
+    @apply backdrop-blur-sm;
   }
   
+  /* Enhanced buttons for better TV visibility */
   .court-button {
-    @apply bg-padel-primary hover:bg-padel-secondary;
-    @apply text-white font-semibold py-3 px-6 rounded-lg;
-    @apply transition-all duration-200 hover:shadow-glow;
-    @apply active:scale-95;
+    @apply bg-gradient-to-br from-padel-primary to-padel-secondary hover:from-padel-primary/90 hover:to-padel-secondary/90;
+    @apply text-white font-bold py-4 px-8 rounded-xl;
+    @apply transition-all duration-300 hover:shadow-glow;
+    @apply active:scale-95 border-2 border-padel-primary/30 hover:border-padel-primary/50;
+    @apply backdrop-blur-sm;
   }
   
+  /* Status messages with maximum contrast */
   .status-message {
-    @apply bg-white/95 backdrop-blur-sm border border-padel-accent/30;
-    @apply px-6 py-4 rounded-xl shadow-elevated;
-    @apply font-medium text-center;
+    @apply bg-gradient-to-br from-padel-primary/95 to-padel-secondary/95 backdrop-blur-sm;
+    @apply border-2 border-padel-primary/30 text-white;
+    @apply px-8 py-6 rounded-3xl shadow-2xl;
+    @apply font-bold text-center;
+  }
+  
+  /* Additional TV-specific optimizations */
+  .tv-floating-indicator {
+    @apply bg-gradient-to-br from-warning/95 to-warning/85 backdrop-blur-sm;
+    @apply border-2 border-warning/30 text-white;
+    @apply px-12 py-6 rounded-full shadow-2xl;
+    @apply font-black text-4xl md:text-5xl lg:text-6xl tracking-wider;
+  }
+  
+  .tv-deuce-indicator {
+    @apply bg-gradient-to-br from-info/95 to-info/85 backdrop-blur-sm;
+    @apply border-2 border-info/30 text-white;
+    @apply px-12 py-6 rounded-full shadow-2xl;
+    @apply font-black text-4xl md:text-5xl lg:text-6xl tracking-wider;
   }
 }
